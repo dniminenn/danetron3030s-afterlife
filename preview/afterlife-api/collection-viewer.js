@@ -21,7 +21,7 @@ function appendCollection(data, _contractaddress, _chain) {
     _contractaddress
   ) {
     // Fetch owner data
-    const ownersUrl = `https://e4res7yu84h5hxzi5km.dnim.dev/${_chain}/${_contractaddress}/owners/${tokenId}`;
+    const ownersUrl = `https://backend.afterlife3030.io/${_chain}/${_contractaddress}/owners/${tokenId}`;
     const ownerResponse = await fetch(ownersUrl);
     const ownerData = await ownerResponse.json();
 
@@ -37,7 +37,7 @@ function appendCollection(data, _contractaddress, _chain) {
 
     collectionDiv.innerHTML = "";
 
-    const { name, description, attributes } = tokenData;
+    const { name, description, attributes, rarity_score, rarity_index } = tokenData;
     let description2 = description.replace(/\n/g, "<br />");
     const imageUrl = `https://assets.afterlife3030.io/${_chain}/${_contractaddress}/${tokenId}.webp`;
 
@@ -50,6 +50,8 @@ function appendCollection(data, _contractaddress, _chain) {
       attributesHtml += "</ul>";
     }
 
+    const rarityScoreDisplay = rarity_score === null ? "Rarity Score: Not available" : `Rarity Score: ${rarity_score}`;
+    const rarityIndexDisplay = rarity_index === null ? "Rarity Index: Not available" : `Rarity Index: ${rarity_index}`;
     collectionDiv.innerHTML = `
     <div class="token-details">
         <h3>${name}</h3>
@@ -58,6 +60,8 @@ function appendCollection(data, _contractaddress, _chain) {
             <div class="description-container">
                 <p>${description2}</p>
                 ${attributesHtml}
+                <p>${rarityIndexDisplay}</p>
+                <p>${rarityScoreDisplay}</p>
                 <p>${ownerString}</p>
                 <button id="returnToOverview">Return to Overview</button>
             </div>
@@ -84,7 +88,7 @@ function appendCollection(data, _contractaddress, _chain) {
 
   if (Object.keys(data).length === 0) {
     const noTokensDiv = document.createElement("div");
-    noTokensDiv.innerHTML = "<p>No tokens in the collection.</p>";
+    noTokensDiv.innerHTML = "";
     collectionDiv.appendChild(noTokensDiv);
     return;
   }
@@ -102,13 +106,15 @@ function appendCollection(data, _contractaddress, _chain) {
       continue;
     }
 
-    const { name } = tokenData;
+    const { name, rarity_index } = tokenData;
     const imageUrl = `https://assets.afterlife3030.io/${_chain}/${_contractaddress}/${tokenId}.webp`;
+    const rarityidxpertoken = rarity_index === null ? "" : `<p>${rarity_index}<p>`;
     const tokenDiv = document.createElement("div");
     tokenDiv.className = "token";
     tokenDiv.innerHTML = `
             <h5>${name}</h5>
             <img src="${imageUrl}" alt="${name}">
+            ${rarityidxpertoken}
         `;
 
     tokenDiv.addEventListener("click", () => {

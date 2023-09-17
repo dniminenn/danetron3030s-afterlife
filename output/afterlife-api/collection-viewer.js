@@ -4,6 +4,17 @@ async function fetchEntireCollection(_contractaddresses) {
 
   for (let contractInfo of _contractaddresses) {
     const { chain, address } = contractInfo;
+
+    // Add a chain header to the collectionDiv
+    const chainHeader = document.createElement('h3');
+    chainHeader.textContent = chain; // or whatever you want to name the chains
+    collectionDiv.appendChild(chainHeader);
+
+    // Create a separate div for this chain's collection and append it to the collectionDiv
+    const chainDiv = document.createElement('div');
+    chainDiv.id = `collection-${chain}`;  // unique ID based on chain
+    collectionDiv.appendChild(chainDiv);
+
     const url = `https://backend.afterlife3030.io/${chain}/${address}/collection/`;
     const response = await fetch(url);
     const data = await response.json();
@@ -12,6 +23,7 @@ async function fetchEntireCollection(_contractaddresses) {
 }
 
 function appendCollection(data, _contractaddress, _chain) {
+  const chainDiv = document.getElementById(`collection-${_chain}`);
   const collectionDiv = document.getElementById("collection");
 
   async function displayTokenDetails(
@@ -124,7 +136,7 @@ function appendCollection(data, _contractaddress, _chain) {
         .scrollIntoView({ behavior: "smooth" });
     });
 
-    collectionDiv.appendChild(tokenDiv);
+    chainDiv.appendChild(tokenDiv);
   }
 }
 

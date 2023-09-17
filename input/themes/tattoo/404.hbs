@@ -2,14 +2,6 @@
 {{> top}}
 <main class="page page--error">
    <div class="hero {{@config.custom.widthHero}}">
-      <header>
-         <h1>
-            {{ translate 'error.404' }}
-         </h1>
-         <p>
-            {{ translate 'error.message-1' }}
-         </p>
-      </header>
       {{#checkIfAll @config.custom.uploadHero @config.custom.displayHeroImage}}
          <figure class="hero__image">
             <img
@@ -22,19 +14,20 @@
                   alt="{{@config.custom.uploadHeroAlt}}">
 
                {{#if @config.custom.uploadHeroCaption}}
-                  <figcaption>
+<!--                  <figcaption>
                      {{@config.custom.uploadHeroCaption}}
                   </figcaption>
-               {{/if}}
+-->               {{/if}}
          </figure>
       {{/checkIfAll}}
    </div>
     <div class="wrapper post__entry">
-         <p>{{ translate 'error.message-2' }}</p>
+      <h1>Lost in the Infinite Realms?</h1>
+         <p>Beneath the mesmerizing dance of the twin blood moons, whispers of lost souls echo. They've ventured too far, drawn by the allure of the unknown, and now they seek a way back to the heart of the Afterlife.</p>
          <p>
-            <a href="{{@website.url}}" class="btn btn--outline">
+            <a href="{{@website.url}}""><button>
                {{ translate 'error.button' }}
-            </a>
+            </button></a>
          </p>
       </div>
 </main>
