@@ -2587,6 +2587,13 @@ p.embellish::first-letter {
   color: #800080;
 }
 
+/* in css, a dot . means class, a # means id */
+.chain-collection {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
 .token-details {
   display: flex;
   flex-direction: column;

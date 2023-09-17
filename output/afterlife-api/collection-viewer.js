@@ -13,6 +13,7 @@ async function fetchEntireCollection(_contractaddresses) {
     // Create a separate div for this chain's collection and append it to the collectionDiv
     const chainDiv = document.createElement('div');
     chainDiv.id = `collection-${chain}`;  // unique ID based on chain
+    chainDiv.className = 'chain-collection'; // class name for styling
     collectionDiv.appendChild(chainDiv);
 
     const url = `https://backend.afterlife3030.io/${chain}/${address}/collection/`;
