@@ -1,0 +1,789 @@
+[
+    {
+        "name": "Main Menu",
+        "position": "",
+        "items": [
+            {
+                "id": 1678824344826,
+                "label": "Black Market",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693514578559,
+                        "label": "Coin Bank",
+                        "title": "",
+                        "type": "external",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "https://afterlife.dnim.dev",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693514626758,
+                        "label": "Black Market Info",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 14,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693514648336,
+                        "label": "My Black Market",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 17,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1693418819933,
+                "label": "Hope's End Penitentiary",
+                "title": "",
+                "type": "post",
+                "target": "_self",
+                "rel": "",
+                "link": 15,
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693514145884,
+                        "label": "Afterlife Inmates",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 15,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693418881068,
+                        "label": "My Inmates",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 16,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678823950438,
+                "label": "Wessgrave",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1678841620875,
+                        "label": "Hunters of Evil",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 2,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678841782640,
+                        "label": "Lil Hunters",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 6,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678841639932,
+                        "label": "BitKillas",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 4,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678848844831,
+                        "label": "BK: Most Wanted",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 7,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678824080219,
+                "label": "Ghosts",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1678841691621,
+                        "label": "Ghosties (Gen 1)",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 8,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678841710676,
+                        "label": "Dark Ones (Gen 2)",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 9,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678841757840,
+                        "label": "Bit Dark Ones",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 10,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678824164516,
+                "label": "Death",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1678841799162,
+                        "label": "Dead Heads",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 11,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678841813242,
+                        "label": "Afterlife Beasts",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 12,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678841853825,
+                        "label": "Baby Beasts",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 13,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678824232631,
+                "label": "Rulers",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1678841953525,
+                        "label": "Blood Lords",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 1,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678824251497,
+                "label": "$ETH Realm",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1678842029966,
+                        "label": "She Reaps",
+                        "title": "",
+                        "type": "external",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "https://opensea.io/collection/she-reaps",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1678842045307,
+                        "label": "Skull Kingz",
+                        "title": "",
+                        "type": "external",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "https://opensea.io/collection/skullkingz",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678824302754,
+                "label": "Gloom of Death",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1678824328101,
+                        "label": "Classics",
+                        "title": "",
+                        "type": "external",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "https://paintswap.finance/marketplace/fantom/collections/danetron%27s-classics",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1678857266359,
+                "label": "Discord",
+                "title": "",
+                "type": "external",
+                "target": "_blank",
+                "rel": "",
+                "link": "https://discord.gg/danetrons-afterlife",
+                "cssClass": "",
+                "isHidden": false,
+                "items": []
+            }
+        ],
+        "maxLevels": ""
+    },
+    {
+        "name": "Alt Menu",
+        "position": "mainMenu",
+        "items": [
+            {
+                "id": 1693804554560,
+                "label": "My Afterlife",
+                "title": "",
+                "type": "post",
+                "target": "_self",
+                "rel": "",
+                "link": 1,
+                "cssClass": "",
+                "isHidden": false,
+                "items": []
+            },
+            {
+                "id": 1693804574699,
+                "label": "Hope's End Penitentiary",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693804592277,
+                        "label": "Afterlife Inmates",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 15,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693804607743,
+                        "label": "My Inmates",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 16,
+                        "cssClass": "",
+                        "isHidden": true,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1693804623626,
+                "label": "Black Market",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693804647375,
+                        "label": "Black Market Information",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 14,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693804666768,
+                        "label": "My Black Market",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 17,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693804717305,
+                        "label": "Coin Bank",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 18,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1693804740369,
+                "label": "FTM Realm",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693804803601,
+                        "label": "Wessgrave",
+                        "title": "",
+                        "type": "separator",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": [
+                            {
+                                "id": 1693805100985,
+                                "label": "BitKillas",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 4,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693805087653,
+                                "label": "BitKillas: Most Wanted",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 7,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693804765830,
+                                "label": "Hunters of Evil",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 2,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693804779497,
+                                "label": "Lil Hunters",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 6,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": 1693860901861,
+                        "label": "Dead Worlds",
+                        "title": "",
+                        "type": "separator",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": [
+                            {
+                                "id": 1693804905435,
+                                "label": "Afterlife Beasts",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 12,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693804919816,
+                                "label": "Baby Beasts",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 13,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693804875508,
+                                "label": "Dead Heads",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 11,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": 1693804931580,
+                        "label": "Spirit Worlds",
+                        "title": "",
+                        "type": "separator",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": [
+                            {
+                                "id": 1693804943379,
+                                "label": "Ghosties",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 8,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693804965645,
+                                "label": "Dark Ones",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 9,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693804987808,
+                                "label": "Bit Dark Ones",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 10,
+                                "cssClass": "",
+                                "isHidden": true,
+                                "items": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": 1693860988407,
+                        "label": "Lord Worlds",
+                        "title": "",
+                        "type": "separator",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": [
+                            {
+                                "id": 1693805368079,
+                                "label": "Danetron's Classics",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 33,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            },
+                            {
+                                "id": 1693861032437,
+                                "label": "Blood Lords",
+                                "title": "",
+                                "type": "post",
+                                "target": "_self",
+                                "rel": "",
+                                "link": 31,
+                                "cssClass": "",
+                                "isHidden": false,
+                                "items": []
+                            }
+                        ]
+                    },
+                    {
+                        "id": 1694246683166,
+                        "label": "Afterlife Bit Creations",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 35,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1693805218241,
+                "label": "AVAX Realm",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693805505313,
+                        "label": "Dead Dreamerz",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 39,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693805527292,
+                        "label": "Crazy Lads",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 41,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1694160149415,
+                        "label": "Hunters of Evil",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 2,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1694160181318,
+                        "label": "BitKillas",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 4,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1693805255142,
+                "label": "ETH Realm",
+                "title": "",
+                "type": "separator",
+                "target": "_self",
+                "rel": "",
+                "link": "",
+                "cssClass": "",
+                "isHidden": false,
+                "items": [
+                    {
+                        "id": 1693805288790,
+                        "label": "She Reaps",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 43,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1693805312905,
+                        "label": "Skull Kingz",
+                        "title": "",
+                        "type": "external",
+                        "target": "_self",
+                        "rel": "",
+                        "link": "https://opensea.io/collection/skullkingz",
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
+            },
+            {
+                "id": 1693805390112,
+                "label": "Discord",
+                "title": "",
+                "type": "external",
+                "target": "_self",
+                "rel": "",
+                "link": "https://discord.gg/danetrons-afterlife",
+                "cssClass": "",
+                "isHidden": false,
+                "items": []
+            }
+        ],
+        "maxLevels": "-1"
+    }
+]
