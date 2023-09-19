@@ -2593,32 +2593,30 @@ p.embellish::first-letter {
   flex-wrap: wrap;
 }
 
-
 .token-details {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
-.token-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.description-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.token-details p {
-  max-width: 100%;
+.token-details a, .description-container {
+  flex: 1;
+  max-width: 50%;
 }
 
 .token-details img {
   max-width: 100%;
-  height: auto;  /* Ensure the height adjusts automatically */
+  height: auto;
   border: 2px solid #335;
   transition: border 0.3s ease;
   background-color: black;
+  flex-shrink: 0; 
+}
+
+.token-details a {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .token-details img:hover {
@@ -2636,6 +2634,12 @@ p.embellish::first-letter {
   display: flex;
   flex-wrap: wrap;
   justify-content: start; /* Align items to the start */
+}
+
+.afterlifepoints {
+  font-size: 0.7rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .token {
@@ -2672,18 +2676,26 @@ p.embellish::first-letter {
   }
 
   .token-content {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
   .token-details img {
-    max-width: 45%;
+    margin-top: 3rem;
+    /*max-height: 45%;*/
+    max-width: 95%;
     height: auto;  /* This is important to ensure images do not stretch vertically */
     object-fit: contain; /* This will make sure the image keeps its original aspect ratio */
   }
 
   .description-container {
     max-width: 45%;
+    padding: 0px 20px 20px 20px;
+    margin-top: 3rem;
+    border: 1px solid #335;
+    background-color: black;
+    font-size: 0.8rem;
   }
 }
 /* center footer image */
@@ -2714,6 +2726,26 @@ p.embellish::first-letter {
     align-items: center; 
     justify-content: center;
     padding: 0.5rem; /* Adding some padding to make buttons more readable */
+}
+
+.chain-header {
+  cursor: pointer;
+  position: relative; 
+  padding-left: 3rem;  /* Space to accommodate the arrow on the left */
+}
+
+.chain-header::after {
+  /* Arrow indicator to show collapsed state */
+  content: '▶'; 
+  position: absolute;
+  left: 10px;          /* Adjust this value to position the arrow to your liking */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.chain-header.expanded::after {
+  /* Arrow indicator for expanded state */
+  content: '▼';
 }
 
 

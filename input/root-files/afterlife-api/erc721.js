@@ -95,7 +95,8 @@ function displayCollection(data, _contractaddress) {
 
   // Function to display token details
   function displayTokenDetails(tokenData, tokenId) {
-    const { balance, name, description, attributes } = tokenData;
+    const { balance, name, description, attributes, rarity_score } = tokenData;
+    const rarityScoreDisplay = rarity_score === null ? "Afterlife Points: Not available" : `Afterlife Points: ${rarity_score}`;
     let description2 = description.replace(/\n/g, "<br />");
     const imageUrl = `https://assets.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}.webp`;
     
@@ -113,10 +114,12 @@ function displayCollection(data, _contractaddress) {
       <div class="token-details">
         <h3>${name}</h3>
         <div class="token-content">
-          <img id="tokenImage" src="${imageUrl}" alt="${name}">
+        <a href="${imageUrl}"  target="_blank" rel="noopener noreferrer"><img id="tokenImage" src="${imageUrl}" alt="${name}"></a>
+        <p class="afterlifepoints">Owned: ${balance}</p>
           <div class="description-container">
             <p>${description2}</p>
             ${attributesHtml}
+            <p>${rarityScoreDisplay}</p>
             <div class="token-actions">
               <button id="transferButton">Transfer</button>
               <button id="burnButton">Burn</button>
@@ -141,10 +144,10 @@ function displayCollection(data, _contractaddress) {
         document.getElementById("collection").scrollIntoView({ behavior: 'smooth' });
       });
     // Add event listener for the image
-    document.getElementById("tokenImage").addEventListener("click", () => {
-      displayCollection(data, _contractaddress); // Re-display the collection overview when image is clicked
-      document.getElementById("collection").scrollIntoView({ behavior: 'smooth' });
-    });
+    //document.getElementById("tokenImage").addEventListener("click", () => {
+    //  displayCollection(data, _contractaddress); // Re-display the collection overview when image is clicked
+    //  document.getElementById("collection").scrollIntoView({ behavior: 'smooth' });
+    //});
   }
 
   // Check if the collection is empty
@@ -156,8 +159,18 @@ function displayCollection(data, _contractaddress) {
   // Clear the collectionDiv for new data
   collectionDiv.innerHTML = "";
 
+  // Sort the tokens by rarity score
+  const sortedTokensArray = Object.entries(data).sort((a, b) => {
+    const tokenA = a[1]; // Token data is the second item in the pair [tokenId, tokenData]
+    const tokenB = b[1];
+  
+    // Sort in descending order by rarity_score. If rarity_score is null, treat it as -Infinity.
+    return (tokenB.rarity_score || -Infinity) - (tokenA.rarity_score || -Infinity);
+  });
+
+
   // If the collection is not empty, display the tokens
-  for (const [tokenId, tokenData] of Object.entries(data)) {
+  for (const [tokenId, tokenData] of sortedTokensArray) {
     const { balance, name } = tokenData;
     const imageUrl = `https://assets.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}.webp`;
     const tokenDiv = document.createElement("div");

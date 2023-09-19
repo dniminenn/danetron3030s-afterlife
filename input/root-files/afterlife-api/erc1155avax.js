@@ -95,7 +95,8 @@ function displayCollection(data, _contractaddress) {
 
   // Function to display token details
   function displayTokenDetails(tokenData, tokenId) {
-    const { balance, name, description, attributes } = tokenData;
+    const { balance, name, description, attributes, rarity_score } = tokenData;
+    const rarityScoreDisplay = rarity_score === null ? "Afterlife Points: Not available" : `Afterlife Points: ${rarity_score}`;
     let description2 = description.replace(/\n/g, "<br />");
     const imageUrl = `https://backend.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}/image`;
     
@@ -114,9 +115,11 @@ function displayCollection(data, _contractaddress) {
         <h3>${name}</h3>
         <div class="token-content">
           <img id="tokenImage" src="${imageUrl}" alt="${name}">
+          <p class="afterlifepoints">Owned: ${balance}</p>
           <div class="description-container">
             <p>${description2}</p>
             ${attributesHtml}
+            <p>${rarityScoreDisplay}</p>
             <div class="token-actions">
               <button id="transferButton">Transfer</button>
               <button id="burnButton">Burn</button>
