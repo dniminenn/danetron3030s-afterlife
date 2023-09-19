@@ -82,7 +82,8 @@ async function fetchCollection(address, _contractaddress) {
   const url = `https://backend.afterlife3030.io/Fantom/${_contractaddress}/collection/${address}`;
   const response = await fetch(url);
   const data = await response.json();
-  displayCollection(data, _contractaddress);
+  if (data.tokens) { displayCollection(data.tokens, _contractaddress);}
+  else { displayCollection(data, _contractaddress); }
 }
 
 function clearCollection() {
@@ -95,7 +96,7 @@ function displayCollection(data, _contractaddress) {
 
   // Function to display token details
   function displayTokenDetails(tokenData, tokenId) {
-    const { balance, name, description, attributes, rarity_score } = tokenData;
+    const { name, description, attributes, rarity_score } = tokenData;
     const rarityScoreDisplay = rarity_score === null ? "Afterlife Points: Not available" : `Afterlife Points: ${rarity_score}`;
     let description2 = description.replace(/\n/g, "<br />");
     const imageUrl = `https://assets.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}.webp`;
@@ -112,10 +113,9 @@ function displayCollection(data, _contractaddress) {
   
     collectionDiv.innerHTML = `
       <div class="token-details">
-        <h3>${name}</h3>
+      <h3>${name}</h3>
         <div class="token-content">
         <a href="${imageUrl}"  target="_blank" rel="noopener noreferrer"><img id="tokenImage" src="${imageUrl}" alt="${name}"></a>
-        <p class="afterlifepoints">Owned: ${balance}</p>
           <div class="description-container">
             <p>${description2}</p>
             ${attributesHtml}

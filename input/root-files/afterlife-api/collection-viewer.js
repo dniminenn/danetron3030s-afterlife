@@ -39,7 +39,8 @@ async function fetchEntireCollection(_contractaddresses) {
     const url = `https://backend.afterlife3030.io/${chain}/${address}/collection/`;
     const response = await fetch(url);
     const data = await response.json();
-    appendCollection(data, address, chain);
+    if (data.tokens) {    appendCollection(data.tokens, address, chain); }
+    else { appendCollection(data, address, chain); }
   }
 }
 

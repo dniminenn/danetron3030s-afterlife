@@ -82,7 +82,8 @@ async function fetchCollection(address, _contractaddress) {
   const url = `https://backend.afterlife3030.io/Avalanche/${_contractaddress}/collection/${address}`;
   const response = await fetch(url);
   const data = await response.json();
-  displayCollection(data, _contractaddress);
+  if (data.tokens) { displayCollection(data.tokens, _contractaddress);}
+  else { displayCollection(data, _contractaddress); }
 }
 
 function clearCollection() {

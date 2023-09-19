@@ -82,7 +82,8 @@ async function fetchCollection(address, _contractaddress) {
   const url = `https://backend.afterlife3030.io/Ethereum/${_contractaddress}/collection/${address}`;
   const response = await fetch(url);
   const data = await response.json();
-  displayCollection(data, _contractaddress);
+  if (data.tokens) { displayCollection(data.tokens, _contractaddress);}
+  else { displayCollection(data, _contractaddress); }
 }
 
 function clearCollection() {
@@ -260,15 +261,15 @@ async function switchToEthereum() {
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: "0xFA", // Chain ID for Ethereum is 0xFA in hexadecimal
-          chainName: "Ethereum Opera",
+          chainId: "0x1", // Chain ID for Ethereum is 0x1 in hexadecimal
+          chainName: "Ethereum Mainnet",
           nativeCurrency: {
-            name: "FTM",
-            symbol: "FTM",
+            name: "ETH",
+            symbol: "ETH",
             decimals: 18,
           },
-          rpcUrls: ["https://rpc.ftm.tools"],
-          blockExplorerUrls: ["https://ftmscan.com/"],
+          rpcUrls: ["https://eth.llamarpc.com"],
+          blockExplorerUrls: ["https://etherscan.com/"],
         },
       ],
     });

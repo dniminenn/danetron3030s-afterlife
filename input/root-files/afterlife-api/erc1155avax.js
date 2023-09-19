@@ -82,7 +82,8 @@ async function fetchCollection(address, _contractaddress) {
   const url = `https://backend.afterlife3030.io/Avalanche/${_contractaddress}/collection/${address}`;
   const response = await fetch(url);
   const data = await response.json();
-  displayCollection(data, _contractaddress);
+  if (data.tokens) { displayCollection(data.tokens, _contractaddress);}
+  else { displayCollection(data, _contractaddress); }
 }
 
 function clearCollection() {
@@ -97,6 +98,7 @@ function displayCollection(data, _contractaddress) {
   function displayTokenDetails(tokenData, tokenId) {
     const { balance, name, description, attributes, rarity_score } = tokenData;
     const rarityScoreDisplay = rarity_score === null ? "Afterlife Points: Not available" : `Afterlife Points: ${rarity_score}`;
+    const ownedDisplay = balance === 1 ? "" : `(Owned: ${balance})`;
     let description2 = description.replace(/\n/g, "<br />");
     const imageUrl = `https://backend.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}/image`;
     
@@ -112,10 +114,9 @@ function displayCollection(data, _contractaddress) {
   
     collectionDiv.innerHTML = `
       <div class="token-details">
-        <h3>${name}</h3>
+        <h3>${name} ${ownedDisplay}</h3>
         <div class="token-content">
           <img id="tokenImage" src="${imageUrl}" alt="${name}">
-          <p class="afterlifepoints">Owned: ${balance}</p>
           <div class="description-container">
             <p>${description2}</p>
             ${attributesHtml}

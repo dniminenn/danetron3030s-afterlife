@@ -761,10 +761,10 @@
                         "id": 1693805312905,
                         "label": "Skull Kingz",
                         "title": "",
-                        "type": "external",
+                        "type": "post",
                         "target": "_self",
                         "rel": "",
-                        "link": "https://opensea.io/collection/skullkingz",
+                        "link": 45,
                         "cssClass": "",
                         "isHidden": false,
                         "items": []
