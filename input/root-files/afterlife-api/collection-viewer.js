@@ -93,7 +93,7 @@ function appendCollection(data, _contractaddress, _chain) {
             <div class="description-container">
                 <p>${description2}</p>
                 ${attributesHtml}
-                <p>${rarityScoreDisplay}</p>
+                <p><img src="/afterlifepoints_insignia.webp" style="width: 3rem; vertical-align: middle;margin-top: 0;border: 0;cursor: default; background: none;">${rarityScoreDisplay}</p>
                 <p>${ownerString}</p>
                 <button id="returnToOverview">Return to Overview</button>
             </div>

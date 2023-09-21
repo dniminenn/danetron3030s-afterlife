@@ -3,6 +3,7 @@ import { erc721_abi } from "/afterlife-api/erc721.abi.js";
 let userAddress = null;
 let signer = null;
 let isSwitchingNetworks = false;
+let username = null;
 
 // Function to handle account changes
 async function handleAccountsChanged(accounts) {
@@ -53,12 +54,12 @@ function handleDisconnect() {
 async function connectWallet() {
   if (window.ethereum) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    
+
     // Add event listeners immediately after detecting the provider
     window.ethereum.on("accountsChanged", handleAccountsChanged);
     window.ethereum.on("chainChanged", handleChainChanged);
     window.ethereum.on("disconnect", handleDisconnect);
-      
+
     try {
       await window.ethereum.enable();
       const network = await provider.getNetwork();
@@ -78,12 +79,44 @@ async function connectWallet() {
   }
 }
 
+async function displayPfpButton(addr) {
+  console.log("Fetching username for address:", addr);
+  let buttonhtml = "";
+  try {
+    const response = await fetch(
+      "https://backend.afterlife3030.io/get-username",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: addr }),
+      }
+    );
+    const data = await response.json();
+
+    if (data.username) {
+      username = data.username;
+      buttonhtml = '<button id="pfpButton">Make PFP</button>';
+    } else {
+      username = null;
+      buttonhtml =
+        '<button disabled="true" id="pfpButton">Register to set as PFP</button>';
+    }
+  } catch (err) {
+    username = null;
+    console.error("Error fetching username:", err);
+  }
+  return buttonhtml; // Return the button's HTML
+}
+
 async function fetchCollection(address, _contractaddress) {
   const url = `https://backend.afterlife3030.io/Avalanche/${_contractaddress}/collection/${address}`;
   const response = await fetch(url);
   const data = await response.json();
-  if (data.tokens) { displayCollection(data.tokens, _contractaddress);}
-  else { displayCollection(data, _contractaddress); }
+  if (data.tokens) {
+    displayCollection(data.tokens, _contractaddress);
+  } else {
+    displayCollection(data, _contractaddress);
+  }
 }
 
 function clearCollection() {
@@ -95,12 +128,16 @@ function displayCollection(data, _contractaddress) {
   const collectionDiv = document.getElementById("collection");
 
   // Function to display token details
-  function displayTokenDetails(tokenData, tokenId) {
+  async function displayTokenDetails(tokenData, tokenId) {
     const { name, description, attributes, rarity_score } = tokenData;
-    const rarityScoreDisplay = rarity_score === null ? "Afterlife Points: Not available" : `Afterlife Points: ${rarity_score}`;
+    const rarityScoreDisplay =
+      rarity_score === null
+        ? "Afterlife Points: Not available"
+        : `Afterlife Points: ${rarity_score}`;
     let description2 = description.replace(/\n/g, "<br />");
-    const imageUrl = `https://backend.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}/image`;
-    
+    const imageUrl = `https://assets.afterlife3030.io/Avalanche/${_contractaddress}/${tokenId}.webp`;
+    const pfpButtonHtml = await displayPfpButton(userAddress);
+
     // Construct the attributes HTML
     let attributesHtml = "";
     if (attributes && attributes.length) {
@@ -108,9 +145,9 @@ function displayCollection(data, _contractaddress) {
       for (let i = 0; i < attributes.length; i++) {
         attributesHtml += `<li><strong>${attributes[i].trait_type}</strong>: ${attributes[i].value}</li>`;
       }
-      attributesHtml += '</ul>';
+      attributesHtml += "</ul>";
     }
-  
+
     collectionDiv.innerHTML = `
       <div class="token-details">
         <h3>${name}</h3>
@@ -119,16 +156,76 @@ function displayCollection(data, _contractaddress) {
           <div class="description-container">
             <p>${description2}</p>
             ${attributesHtml}
-            <p>${rarityScoreDisplay}</p>
+            <p><img src="/afterlifepoints_insignia.webp" style="width: 3rem; vertical-align: middle;margin-top: 0;border: 0;cursor: default; background: none;">${rarityScoreDisplay}</p>
             <div class="token-actions">
               <button id="transferButton">Transfer</button>
               <button id="burnButton">Burn</button>
               <button id="returnToOverview">Return to Overview</button>
+              ${pfpButtonHtml}
             </div>
           </div>
         </div>
       </div>
     `;
+
+    // Add event listener for the pfp button
+    document.getElementById("pfpButton").addEventListener("click", () => {
+      (async () => {
+        try {
+          // Get the challenge nonce
+          const getChallengeResponse = await fetch(
+            `https://backend.afterlife3030.io/get-challenge-pfp?username=${username}`
+          );
+          const challengeData = await getChallengeResponse.json();
+
+          if (challengeData.error) {
+            console.error(challengeData.error);
+            alert("Error getting challenge nonce. Please try again later.");
+            return;
+          }
+
+          const nonce = challengeData.challenge;
+          // Assuming you have a function `getUserSignedMessage` that gets the user to sign the nonce
+          const signedMessage = await signer.signMessage(nonce);
+
+          // Set the profile picture with the signed message
+          const response = await fetch(
+            "https://backend.afterlife3030.io/set-pfp",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: username,
+                signedMessage: signedMessage,
+                chain: "Avalanche",
+                contract: _contractaddress,
+                tokenId: tokenId,
+                address: userAddress,
+              }),
+            }
+          );
+
+          const responseData = await response.json();
+
+          if (responseData.error) {
+            console.error(responseData.error);
+            document.getElementById("pfpButton").innerHTML = "Error!";
+            document.getElementById("pfpButton").disabled = true;
+            return;
+          } else if (responseData.success) {
+            console.log("Profile picture set successfully!");
+            document.getElementById("pfpButton").innerHTML = "PFP Set!";
+            document.getElementById("pfpButton").disabled = true;
+          }
+        } catch (error) {
+          console.error("Network or general error:", error);
+        }
+      })().catch((err) => {
+        console.error("Error in the async function:", err);
+      });
+    });
 
     // Add event listeners for the buttons
     document.getElementById("transferButton").addEventListener("click", () => {
@@ -141,18 +238,16 @@ function displayCollection(data, _contractaddress) {
       .getElementById("returnToOverview")
       .addEventListener("click", () => {
         displayCollection(data, _contractaddress); // Re-display the collection overview
-        document.getElementById("collection").scrollIntoView({ behavior: 'smooth' });
+        document
+          .getElementById("collection")
+          .scrollIntoView({ behavior: "smooth" });
       });
-    // Add event listener for the image
-    //document.getElementById("tokenImage").addEventListener("click", () => {
-    //  displayCollection(data, _contractaddress); // Re-display the collection overview when image is clicked
-    //  document.getElementById("collection").scrollIntoView({ behavior: 'smooth' });
-    //});
   }
 
   // Check if the collection is empty
   if (Object.keys(data).length === 0) {
-    collectionDiv.innerHTML = "<p>You don't own any tokens.</p>";
+    collectionDiv.innerHTML =
+      '<p>You don\'t own any tokens.</p><img src="/deadghostie.png" style="width: 10rem; vertical-align: middle;margin-top: 0;border: 0;cursor: default; background: none;">';
     return;
   }
 
@@ -163,25 +258,33 @@ function displayCollection(data, _contractaddress) {
   const sortedTokensArray = Object.entries(data).sort((a, b) => {
     const tokenA = a[1]; // Token data is the second item in the pair [tokenId, tokenData]
     const tokenB = b[1];
-  
-    // Sort in descending order by rarity_score. If rarity_score is null, treat it as -Infinity.
-    return (tokenB.rarity_score || -Infinity) - (tokenA.rarity_score || -Infinity);
-  });
 
+    // Sort in descending order by rarity_score. If rarity_score is null, treat it as -Infinity.
+    return (
+      (tokenB.rarity_score || -Infinity) - (tokenA.rarity_score || -Infinity)
+    );
+  });
 
   // If the collection is not empty, display the tokens
   for (const [tokenId, tokenData] of sortedTokensArray) {
-    const { balance, name } = tokenData;
-    const imageUrl = `https://assets.afterlife3030.io/Fantom/Avalanche/${tokenId}.webp`;
+    const { balance, name, rarity_score } = tokenData;
+    const afterlifepoints =
+      rarity_score === null
+        ? ""
+        : `<p class="afterlifepoints">${rarity_score} Afterlife Points<p>`;
+    const imageUrl = `https://assets.afterlife3030.io/Avalanche/${_contractaddress}/${tokenId}.webp`;
     const tokenDiv = document.createElement("div");
     tokenDiv.className = "token";
     tokenDiv.innerHTML = `
       <h5>${name}</h5>
       <img src="${imageUrl}" alt="${name}">
+      ${afterlifepoints}
     `;
     tokenDiv.addEventListener("click", () => {
       displayTokenDetails(tokenData, tokenId); // Display details when clicked
-      document.getElementById("collection").scrollIntoView({ behavior: 'smooth' });
+      document
+        .getElementById("collection")
+        .scrollIntoView({ behavior: "smooth" });
     });
     collectionDiv.appendChild(tokenDiv);
   }
@@ -259,31 +362,40 @@ async function switchToAvalanche() {
   isSwitchingNetworks = true;
   try {
     await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [
-        {
-          chainId: "0xa86a",
-          chainName: "Avalanche Network C-Chain",
-          nativeCurrency: {
-            name: "AVAX",
-            symbol: "AVAX",
-            decimals: 18,
-          },
-          rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-          blockExplorerUrls: ["https://snowtrace.io/"],
-        },
-      ],
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0xa86a" }], // Chain ID for Avalanche C-Chain
     });
-  } catch (error) {
-    console.error("User rejected the request:", error);
+  } catch (switchError) {
+    // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0xa86a",
+              chainName: "Avalanche Network C-Chain",
+              nativeCurrency: {
+                name: "AVAX",
+                symbol: "AVAX",
+                decimals: 18,
+              },
+              rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+              blockExplorerUrls: ["https://snowtrace.io/"],
+            },
+          ],
+        });
+      } catch (addError) {
+        console.error("Error adding Avalanche network:", addError);
+      }
+    } else {
+      console.error("Error switching to Avalanche network:", switchError);
+    }
   } finally {
     isSwitchingNetworks = false;
+    window.location.reload();
   }
 }
-
-window.addEventListener("load", async (event) => {
-  await connectWallet(); // Check the connection status when the page loads
-});
 
 document
   .getElementById("connectButton")
