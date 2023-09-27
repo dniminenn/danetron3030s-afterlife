@@ -361,10 +361,35 @@
                 "type": "post",
                 "target": "_self",
                 "rel": "",
-                "link": 1,
+                "link": 47,
                 "cssClass": "",
                 "isHidden": false,
-                "items": []
+                "items": [
+                    {
+                        "id": 1695771614003,
+                        "label": "My Afterlife",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 47,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    },
+                    {
+                        "id": 1695771628030,
+                        "label": "My Account",
+                        "title": "",
+                        "type": "post",
+                        "target": "_self",
+                        "rel": "",
+                        "link": 48,
+                        "cssClass": "",
+                        "isHidden": false,
+                        "items": []
+                    }
+                ]
             },
             {
                 "id": 1693804574699,

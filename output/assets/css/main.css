@@ -376,10 +376,13 @@ table {
   border-spacing: 0;
   display: block;
   max-width: 100%;
-  overflow-x: auto;
   vertical-align: top;
   text-align: left;
-  white-space: nowrap;
+}
+table p {
+  font-size: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
 }
 table th {
   border-bottom: 2px solid var(--light);
@@ -403,16 +406,14 @@ figcaption {
 
 hr,
 .separator {
-  background: none;
-  border: none;
+  border: 1px dashed #fe0084;
   height: auto;
-  line-height: 1;
+  line-height: 0;
   max-width: none;
-  text-align: center;
 }
 hr::before,
 .separator::before {
-  content: "···";
+  content: "";
   color: var(--dark);
   font-size: 1.2136296308rem;
   font-weight: var(--font-weight-bold);
@@ -421,7 +422,7 @@ hr::before,
 }
 
 .separator--dot::before {
-  content: "·";
+  content: "";
   color: var(--dark);
   font-size: 1.2136296308rem;
   font-weight: var(--font-weight-bold);
@@ -2591,6 +2592,9 @@ p.embellish::first-letter {
 .chain-collection {
   display: flex;
   flex-wrap: wrap;
+  overflow-y: auto;
+  max-height: 50rem;
+
 }
 
 .token-details {
@@ -2640,7 +2644,7 @@ p.embellish::first-letter {
 }
 
 .afterlifepoints {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -2762,4 +2766,109 @@ p.embellish::first-letter {
   background-color: black;
   border: 2px solid purple;
   text-align: center;
+}
+
+#leaderboardContainer {
+  flex: 2;
+  max-width: 100%;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  border: 1px solid #fd0d98;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  max-height: 33rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#leaderboardheader {
+  display: none;
+}
+
+#profileHoverContainer {
+  align-items: center;
+  flex: 1;
+  width: 36%;
+  margin: .5rem auto;
+  padding: .5rem;
+  border: 1px solid #fd0d98;
+  border-radius: 5px;
+  font-size: .8rem;
+}
+
+#afterlifecontainer {
+  display: none;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+#myprofile {
+  display: none;
+}
+
+#myprofileheader {
+  display: none;
+}
+
+.leaderboardItem {
+  display: flex;
+  align-items: center; /* This will ensure that the items are vertically centered */
+  justify-content: space-between; 
+  padding: 1px; /* Adjust padding here so it's uniform */
+  /*border-bottom: 1px solid #eee;*/
+}
+.leaderboardItem:hover {
+  background-color: darkmagenta;
+  cursor: pointer;
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center; /* Ensures that the profile picture and the username are aligned vertically */
+  max-width: 70%;
+}
+
+.profilePicture {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 8px;
+  border: 2px solid #fd0d98;
+}
+.username {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  display: inline-block; /* ensures that it respects the max-width */
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#welcomeMessage {
+  display: none;
 }

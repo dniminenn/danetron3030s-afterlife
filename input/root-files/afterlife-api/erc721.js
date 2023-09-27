@@ -199,7 +199,7 @@ function displayCollection(data, _contractaddress) {
               body: JSON.stringify({
                 username: username,
                 signedMessage: signedMessage,
-                chain: "Avalanche",
+                chain: "Fantom",
                 contract: _contractaddress,
                 tokenId: tokenId,
                 address: userAddress,
@@ -271,7 +271,7 @@ function displayCollection(data, _contractaddress) {
     const afterlifepoints =
       rarity_score === null
         ? ""
-        : `<p class="afterlifepoints">${rarity_score} Afterlife Points<p>`;
+        : `<p class="afterlifepoints"><img src="/afterlifepoints_insignia.webp" style="width: 2rem; vertical-align: middle;margin-top: 0;border: 0;cursor: default; background: none; min-height: 0px;"><strong>${rarity_score}</strong><p>`;
     const imageUrl = `https://assets.afterlife3030.io/Fantom/${_contractaddress}/${tokenId}.webp`;
     const tokenDiv = document.createElement("div");
     tokenDiv.className = "token";
@@ -305,7 +305,7 @@ async function transferToken(tokenId) {
       tokenId
     );
     await tx.wait();
-    alert("Transfer successful!" + "\n" + "Tx Hash: " + tx.hash);
+    alert("Transfer successful! Transaction could take 5 minutes to show on website." + "\n" + "Tx Hash: " + tx.hash);
   } catch (err) {
     console.error("Transfer failed:", err);
   }
@@ -322,7 +322,7 @@ async function burnToken(tokenId) {
       tokenId
     );
     await tx.wait();
-    alert("Burn successful!");
+    alert("Burn successful! Transaction could take 5 minutes to show on website." + "\n" + "Tx Hash: " + tx.hash);
   } catch (err) {
     console.error("Burn failed:", err);
   }

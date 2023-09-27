@@ -37,8 +37,10 @@ async function initializePageState() {
             await fetchUsernameForAddress(address);
         }
     } catch (err) {
-        console.error("Error initializing page state:", err);
-        showError("Error initializing page state. Please refresh the page and try again.")
+            // No account is connected
+            document.getElementById("walletContainer").style.display = "block";
+            document.getElementById("registration-container").style.display = "none";
+            console.log("No account connected");
     }
 }
 

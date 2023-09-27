@@ -136,7 +136,7 @@ function displayCollection(data, _contractaddress) {
         : `Afterlife Points: ${rarity_score * balance}`;
     const ownedDisplay = balance === 1 ? "" : `(Owned: ${balance})`;
     let description2 = description.replace(/\n/g, "<br />");
-    const imageUrl = `https://assets.afterlife3030.io/assets/Avalanche/${_contractaddress}/${tokenId}.webp`;
+    const imageUrl = `https://assets.afterlife3030.io/Avalanche/${_contractaddress}/${tokenId}.webp`;
     const pfpButtonHtml = await displayPfpButton(userAddress);
 
     // Construct the attributes HTML
@@ -272,7 +272,7 @@ function displayCollection(data, _contractaddress) {
     const afterlifepoints =
       rarity_score === null
         ? ""
-        : `<p class="afterlifepoints">${rarity_score} Afterlife Points<p>`;
+        : `<p class="afterlifepoints"><img src="/afterlifepoints_insignia.webp" style="width: 2rem; vertical-align: middle;margin-top: 0;border: 0;cursor: default; background: none; min-height: 0px;"><strong>${rarity_score}</strong><p>`;
     const imageUrl = `https://assets.afterlife3030.io/Avalanche/${_contractaddress}/${tokenId}.webp`;
     const tokenDiv = document.createElement("div");
     tokenDiv.className = "token";
@@ -331,7 +331,7 @@ async function transferToken(tokenId) {
       data
     );
     await tx.wait();
-    alert("Transfer successful!" + "\n" + "Tx Hash: " + tx.hash);
+    alert("Transfer successful! Transaction could take 5 minutes to show on website." + "\n" + "Tx Hash: " + tx.hash);
   } catch (err) {
     console.error("Transfer failed:", err);
   }
@@ -361,7 +361,7 @@ async function burnToken(tokenId) {
   try {
     const tx = await contract.burn(tokenId, amount);
     await tx.wait();
-    alert("Burn successful!");
+    alert("Burn successful! Transaction could take 5 minutes to show on website." + "\n" + "Tx Hash: " + tx.hash);
   } catch (err) {
     console.error("Burn failed:", err);
   }
