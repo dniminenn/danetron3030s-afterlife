@@ -126,7 +126,7 @@ document.getElementById("registerButton").addEventListener("click", async () => 
         const registrationData = await registrationResponse.json();
 
         if (registrationData.message) {
-            showSuccess("Registration successful!")
+            showSuccess("Registration successful! Please wait 10 minutes for changes to propagate.")
             document.getElementById("registration-container").style.display = "none";
             document.getElementById("displayUsername").textContent = username;
             document.getElementById("existingUserContainer").style.display = "block"; // Show the option to add another address

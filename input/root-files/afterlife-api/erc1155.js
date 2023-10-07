@@ -338,6 +338,7 @@ async function transferToken(tokenId) {
 }
 
 async function burnToken(tokenId) {
+  const deadAddress = "0x000000000000000000000000000000000000dead";
   // Fetch the current balance of the token
   const contract = new ethers.Contract(contractaddress, erc1155_abi, signer);
   const balance = await contract.balanceOf(userAddress, tokenId);
@@ -358,8 +359,15 @@ async function burnToken(tokenId) {
     return;
   }
 
+  const data = ethers.utils.toUtf8Bytes("afterlife3030.io");
   try {
-    const tx = await contract.burn(tokenId, amount);
+    const tx = await contract.safeTransferFrom(
+      userAddress,
+      deadAddress,
+      tokenId,
+      amount,
+      data
+    );
     await tx.wait();
     alert("Burn successful! Transaction could take 5 minutes to show on website." + "\n" + "Tx Hash: " + tx.hash);
   } catch (err) {

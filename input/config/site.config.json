@@ -19,7 +19,7 @@
         "forceWebp": true,
         "webpLossless": false,
         "responsiveImages": false,
-        "mediaLazyLoad": true,
+        "mediaLazyLoad": false,
         "versionSuffix": false,
         "sitemapEnabled": false,
         "sitemapAddTags": 1,
@@ -27,12 +27,12 @@
         "sitemapAddHomepage": 1,
         "sitemapAddExternalImages": 0,
         "sitemapExcludedFiles": "",
-        "usePageTitleInsteadItemName": false,
-        "openGraphEnabled": false,
-        "openGraphImage": "",
+        "usePageTitleInsteadItemName": true,
+        "openGraphEnabled": true,
+        "openGraphImage": "afterlife_server.webp",
         "openGraphAppId": "",
         "twitterCardsEnabled": 1,
-        "twitterCardsType": "summary",
+        "twitterCardsType": "summary_large_image",
         "twitterUsername": "@TheDanetron3030",
         "metaTitle": "%sitename",
         "metaDescription": "Explore the Afterlife by Danetron3030 - a hub for art lovers to connect, play digital asset games, and collect unique NFTs across multiple blockchain networks.",
@@ -214,5 +214,5 @@
         }
     },
     "theme": "tattoo",
-    "syncDate": 1695798796868
+    "syncDate": 1696622956566
 }

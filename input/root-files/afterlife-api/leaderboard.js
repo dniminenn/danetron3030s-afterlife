@@ -3,7 +3,6 @@ import { address_to_name } from "/afterlife-api/contract_to_name.js";
 
 let signer;
 let userAddress;
-let active_userRanking;
 let active_username;
 
 async function showError(message) {
@@ -27,11 +26,12 @@ const loadProfile = async (username, level, points) => {
   const profileHoverContainer = document.getElementById(
     "profileHoverContainer"
   );
-  const pfpResponse = await fetch(
-    `https://backend.afterlife3030.io/get-pfp?username=${username}`
-  );
-  const pfpData = await pfpResponse.json();
-  const pfpUrl = pfpData.pfp_url;
+  //const pfpResponse = await fetch(
+  //  `https://backend.afterlife3030.io/get-pfp?username=${username}`
+  //);
+  //const pfpData = await pfpResponse.json();
+  //const pfpUrl = pfpData.pfp_url;
+  const pfpUrl = `https://assets.afterlife3030.io/pfp/${username}.webp`;
 
   const level_image = level_to_image(level);
 
@@ -79,7 +79,6 @@ async function connectWallet() {
 // Function to handle disconnection
 function handleDisconnect() {
   active_username = null;
-  active_userRanking = null;
   console.log("MetaMask has disconnected");
   signer = null;
   updateUI(null);
@@ -92,16 +91,14 @@ async function handleAccountsChanged(accounts) {
     console.log("Please connect to MetaMask.");
     signer = null;
     userAddress = null;
-    active_userRanking = null;
     active_username = null;
     updateUI(null);
   } else if (accounts[0] !== userAddress.toLowerCase()) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
     userAddress = await signer.getAddress();
-    username = await fetchUsernameForAddress(userAddress);
+    var username = await fetchUsernameForAddress(userAddress);
     active_username = username;
-    active_userRanking = null;
     updateUI(username);
   }
 }
@@ -141,9 +138,9 @@ async function updateUI(username) {
     update_afterlife_header(username, active_username);
     welcomeMessage.style.display = "block";
     afterlifecontainer.style.display = "flex";
-    await getLeaderboard(); // load the leaderboard
+    await getMyProfile(username); // load my profile
     // click on the profile button
-    document.getElementById("viewProfile").click();
+    //document.getElementById("viewProfile").click();
   } else {
     console.log("Resetting UI");
     welcomeMessage.style.display = "none";
@@ -187,26 +184,21 @@ async function getLeaderboard() {
     // Convert the data object into an array and sort it based on scores, but don't slice it
     let sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
 
-    // Calculate the user's ranking
-    active_userRanking =
-      sortedData.findIndex((entry) => entry[0] === active_username) + 1;
-
     // Finally, slice the array to only include the top 200 entries
 
-    sortedData = sortedData.slice(0, 25);
-
-    console.log("User ranking:", active_userRanking);
+    sortedData = sortedData.slice(0, 200);
 
     for (let [username, score] of sortedData) {
       const leaderboardItem = document.createElement("div");
       leaderboardItem.className = "leaderboardItem";
 
       // Fetch the profile picture for this user
-      const pfpResponse = await fetch(
-        `https://backend.afterlife3030.io/get-pfp?username=${username}`
-      );
-      const pfpData = await pfpResponse.json();
-      const pfpUrl = pfpData.pfp_url;
+      //const pfpResponse = await fetch(
+      //  `https://backend.afterlife3030.io/get-pfp?username=${username}`
+      //);
+      //const pfpData = await pfpResponse.json();
+      //const pfpUrl = pfpData.pfp_url;
+      const pfpUrl = `https://assets.afterlife3030.io/pfp/${username}.webp`;
       const level = points_to_level(score);
       const level_image = level_to_image(level);
 
@@ -234,9 +226,7 @@ async function getLeaderboard() {
       });
 
       leaderboardItem.addEventListener("click", () => {
-        // Calculate the user's ranking
-        let rank = sortedData.findIndex((entry) => entry[0] === username) + 1;
-        getMyProfile(username, rank);
+        getMyProfile(username);
       });
 
       leaderboardContainer.appendChild(leaderboardItem);
@@ -248,7 +238,7 @@ async function getLeaderboard() {
   }
 }
 
-async function getMyProfile(addr, ranking) {
+async function getMyProfile(usr) {
   hideError();
   console.log("Loading my profile");
   document.getElementById("walletContainer").innerHTML =
@@ -259,9 +249,11 @@ async function getMyProfile(addr, ranking) {
   document.getElementById("leaderboardContainer").style.display = "none";
   document.getElementById("profileHoverContainer").style.display = "none";
 
-  update_afterlife_header(addr, active_username);
+  update_afterlife_header(usr, active_username);
 
-  const endpoint = `https://backend.afterlife3030.io/user/level/${addr}`;
+  let ranking = await get_user_rank(usr);
+
+  const endpoint = `https://backend.afterlife3030.io/user/level/${usr}`;
 
   try {
     const response = await fetch(endpoint);
@@ -272,16 +264,22 @@ async function getMyProfile(addr, ranking) {
 
     const data = await response.json();
 
+    // the api returns an array of wallets addresses in the user's account
+    // we'll need them later
+    //const all_addresses = data.addresses;
+    //const num_addresses = all_addresses.length;
+
+
     const profileContainer = document.getElementById("myprofile");
     const profileHeader = document.getElementById("myprofileheader");
     const level = points_to_level(data.afterlifepoints);
     const level_image = level_to_image(level);
     // Fetch the profile picture for this user
-    const pfpResponse = await fetch(
-      `https://backend.afterlife3030.io/get-pfp?username=${addr}`
-    );
-    const pfpData = await pfpResponse.json();
-    const pfpUrl = pfpData.pfp_url;
+    //const pfpResponse = await fetch(
+    //  `https://backend.afterlife3030.io/get-pfp?username=${usr}`
+    //);
+    //const pfpData = await pfpResponse.json();
+    const pfpUrl = `https://assets.afterlife3030.io/pfp/${usr}.webp`;
 
     const numNFTs = data.top_nfts.length;
 
@@ -312,9 +310,9 @@ async function getMyProfile(addr, ranking) {
       document.getElementById("viewLeaderboard").disabled = true;
       topNFTsHTML = `</div>`;
       // truncate address to 0x123...abc
-      const addr_trunc = addr.slice(0, 6) + "..." + addr.slice(-3);
+      const addr_trunc = userAddress.slice(0, 6) + "..." + userAddress.slice(-3);
       // tell the user he needs to buy some Afterlife NFTs, be nice
-      profileHeader.innerHTML = `<p>Oops, ${addr_trunc}, you need a Danetron3030 NFT to enter the Infinite Realms.</p>`;
+      profileHeader.innerHTML = `<p>Oops, ${addr_trunc}, you need a Danetron3030 NFT to enter the Infinite Realms. <strong>If you've just registered a new username, it can take about 10 minutes for changes to propagate.</p>`;
     }
 
     let suffix = number_suffix(ranking);
@@ -356,14 +354,25 @@ async function getMyProfile(addr, ranking) {
 }
 
 function points_to_level(points) {
-  // score = 0, level = 0
-  // score = 1 - 999, level = 1
-  // score = 1000 - 1999, level = 2
-  if (points == 0) {
+  const a = 100;
+  const r = 1.0625;
+
+  // If points is 0, return Level 0
+  if (points === 0) {
     return 0;
-  } else {
-    return Math.floor(points / 1000) + 1;
   }
+
+  let level = 1;
+  while (level <= 60) {
+    const cumulativeXP = a * (Math.pow(r, level - 1) - 1) / (r - 1);
+    if (points < cumulativeXP) {
+      return level - 1;
+    }
+    level += 1;
+  }
+
+  // If we exceed all levels up to 60, return 60
+  return 60;
 }
 
 function level_to_image(level) {
@@ -380,7 +389,7 @@ document
   .addEventListener("click", async (event) => {
     if (event.target.id === "viewProfile") {
       console.log("Switching to profile");
-      await getMyProfile(active_username, active_userRanking);
+      await getMyProfile(active_username);
     } else if (event.target.id === "viewLeaderboard") {
       console.log("Switching to leaderboard");
       await getLeaderboard();
@@ -417,5 +426,32 @@ function update_afterlife_header(display_username, calling_user) {
   } else {
     // change to Welcome, (your username), you are traversing the Infinite Realms and are viewing another Afterlifer's Profile
     welcomeMessage.innerHTML = `<p class="embellish">Welcome, <em><a href="/my-account">${calling_user}</a></em>! You are traversing the Infinite Realms and are viewing another Afterlifer's profile.</p>`;
+  }
+}
+
+async function get_user_rank(usr) {
+  const leaderboardEndpoint = "https://assets.afterlife3030.io/leaderboard.json";
+
+  try {
+    const response = await fetch(leaderboardEndpoint);
+    const data = await response.json();
+
+    let userRanking = 0;
+
+    // Convert the data object into an array and sort it based on scores, but don't slice it
+    let sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
+
+    // Is the user in the leaderboard?
+    let userInLeaderboard = sortedData.find((entry) => entry[0] === usr);
+
+    // Calculate the user's ranking
+    if (userInLeaderboard) {
+      userRanking = sortedData.findIndex((entry) => entry[0] === usr) + 1;
+    }
+
+    return userRanking;
+  } catch (error) {
+    showError("Error fetching My Afterlife data.");
+    console.error("Error fetching leaderboard data:", error);
   }
 }

@@ -199,7 +199,7 @@ function displayCollection(data, _contractaddress) {
               body: JSON.stringify({
                 username: username,
                 signedMessage: signedMessage,
-                chain: "Fantom",
+                chain: "Ethereum",
                 contract: _contractaddress,
                 tokenId: tokenId,
                 address: userAddress,
